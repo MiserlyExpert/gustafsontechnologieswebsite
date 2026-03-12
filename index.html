@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustafson Technologies — Autonomous Surface Vehicles</title>
+  <meta name="description" content="Gustafson Technologies develops autonomous surface vehicles for real-world maritime operations. Built from the ground up for reliability, precision, and scalability." />
+  <link rel="icon" type="image/png" href="MainLogoPNG.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(15,58,94,0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 60%, rgba(59,158,222,0.08) 0%, transparent 60%),
+        linear-gradient(160deg, var(--navy-800) 0%, var(--navy-900) 60%);
+      z-index: 0;
+    }
+
+    /* Animated radar ring */
+    .hero-radar {
+      position: absolute;
+      right: -5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      border: 1px solid rgba(59,158,222,0.1);
+      z-index: 0;
+    }
+    .hero-radar::before, .hero-radar::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(59,158,222,0.08);
+    }
+    .hero-radar::before { inset: 80px; }
+    .hero-radar::after  { inset: 200px; }
+
+    .radar-sweep {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(59,158,222,0.15), transparent 60deg);
+      animation: sweep 5s linear infinite;
+    }
+    @keyframes sweep { to { transform: rotate(360deg); } }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      padding-top: 5rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: fadeDown 0.8s ease both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 3rem; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      margin-bottom: 0.5rem;
+      animation: fadeDown 0.8s 0.15s ease both;
+    }
+
+    .hero h1 .accent-word { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--silver-dim);
+      max-width: 560px;
+      margin: 1.5rem 0 2.5rem;
+      font-weight: 300;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeDown 0.8s 0.45s ease both;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--grid-line);
+      animation: fadeDown 0.8s 0.6s ease both;
+      flex-wrap: wrap;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── TICKER ── */
+    .ticker-bar {
+      background: var(--navy-800);
+      border-top: 1px solid var(--grid-line);
+      border-bottom: 1px solid var(--grid-line);
+      padding: 0.75rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      gap: 4rem;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--silver-dim);
+      text-transform: uppercase;
+    }
+    .ticker-item span { color: var(--accent); margin-right: 0.5rem; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── PROBLEM / SOLUTION ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 4rem;
+    }
+    .problem-panel {
+      padding: 3rem;
+      background: rgba(10,32,53,0.8);
+      position: relative;
+    }
+    .problem-panel:first-child {
+      border-right: 2px solid var(--accent);
+    }
+    .problem-panel .panel-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .problem-panel:first-child .panel-tag { color: #e05a5a; }
+    .problem-panel:last-child  .panel-tag { color: var(--accent); }
+
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--silver-dim);
+    }
+    .problem-list li::before {
+      content: '▸';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .problem-panel:first-child .problem-list li::before { color: #e05a5a; }
+
+    /* ── USE CASES ── */
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .use-case-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--navy-700), var(--navy-600));
+      border-top: 1px solid rgba(59,158,222,0.2);
+      border-bottom: 1px solid rgba(59,158,222,0.2);
+      padding: 5rem 0;
+      text-align: center;
+    }
+    .cta-band h2 { margin-bottom: 1rem; }
+    .cta-band p {
+      color: var(--silver-dim);
+      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-band .btn { margin: 0 0.5rem; }
+
+    @media (max-width: 768px) {
+      .problem-grid  { grid-template-columns: 1fr; }
+      .problem-panel:first-child { border-right: none; border-bottom: 2px solid var(--accent); }
+      .use-case-grid { grid-template-columns: 1fr; }
+      .hero-stats    { gap: 2rem; }
+      .hero-radar    { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="MainLogoPNG.png" alt="GT" />
+      <span class="nav-logo-text">Gustafson Technologies</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="technology.html">Technology</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-radar"><div class="radar-sweep"></div></div>
+      <div class="hero-content container">
+        <p class="hero-eyebrow">Gustafson Technologies LLC</p>
+        <h1>
+          Autonomous<br />
+          <span class="accent-word">Surface</span><br />
+          Vehicles
+        </h1>
+        <p class="hero-sub">
+          Purpose-built ASV platforms for real-world maritime operations —
+          engineered for reliability, precision, and scalable deployment.
+        </p>
+        <div class="hero-actions">
+          <a href="technology.html" class="btn btn-primary">View Technology →</a>
+          <a href="contact.html" class="btn btn-outline">Partner With Us</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-number">ASV</div>
+            <div class="stat-label">Autonomous Surface Vehicle</div>
+          </div>
+          <div>
+            <div class="stat-number">v1.0</div>
+            <div class="stat-label">Benchtop Prototype</div>
+          </div>
+          <div>
+            <div class="stat-number">2025</div>
+            <div class="stat-label">Founded</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TICKER ── -->
+    <div class="ticker-bar">
+      <div class="ticker-inner">
+        <span class="ticker-item"><span>◆</span> Autonomous Navigation</span>
+        <span class="ticker-item"><span>◆</span> Sensor Fusion</span>
+        <span class="ticker-item"><span>◆</span> Real-Time Control Systems</span>
+        <span class="ticker-item"><span>◆</span> Maritime Autonomy</span>
+        <span class="ticker-item"><span>◆</span> Gustafson Technologies LLC</span>
+        <span class="ticker-item"><span>◆</span> Benchtop Prototype Active</span>
+        <span class="ticker-item"><span>◆</span> Seeking Partners & Investors</span>
+        <!-- duplicate for seamless loop -->
+        <span class="ticker-item"><span>◆</span> Autonomous Navigation</span>
+        <span class="ticker-item"><span>◆</span> Sensor Fusion</span>
+        <span class="ticker-item"><span>◆</span> Real-Time Control Systems</span>
+        <span class="ticker-item"><span>◆</span> Maritime Autonomy</span>
+        <span class="ticker-item"><span>◆</span> Gustafson Technologies LLC</span>
+        <span class="ticker-item"><span>◆</span> Benchtop Prototype Active</span>
+        <span class="ticker-item"><span>◆</span> Seeking Partners & Investors</span>
+      </div>
+    </div>
+
+    <!-- ── PROBLEM / SOLUTION ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">The Opportunity</p>
+        <h2>Why Autonomous<br />Surface Vehicles?</h2>
+        <p style="color:var(--silver-dim); max-width:600px; margin-top:1rem;">
+          Maritime operations are among the most data-intensive, hazardous, and
+          costly domains in the world. Automation is no longer optional — it's the
+          next frontier.
+        </p>
+        <div class="problem-grid fade-in">
+          <div class="problem-panel">
+            <p class="panel-tag">// The Problem</p>
+            <h3>Human-Crewed Operations Are Costly & Risky</h3>
+            <ul class="problem-list">
+              <li>Manned vessels require continuous crew oversight and are subject to human error</li>
+              <li>Dangerous survey and monitoring missions put personnel at unnecessary risk</li>
+              <li>High operational cost limits frequency and scope of maritime data collection</li>
+              <li>Existing autonomous platforms are expensive, proprietary, and inflexible</li>
+            </ul>
+          </div>
+          <div class="problem-panel">
+            <p class="panel-tag">// Our Solution</p>
+            <h3>Intelligent, Scalable ASV Platforms</h3>
+            <ul class="problem-list">
+              <li>Fully autonomous navigation with real-time obstacle avoidance</li>
+              <li>Modular sensor payload system adaptable to any mission profile</li>
+              <li>Built on open, extensible software architecture for rapid iteration</li>
+              <li>Designed from the ground up for reliability in real-world conditions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── USE CASES ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Applications</p>
+        <h2>Where GT Vehicles Operate</h2>
+        <div class="use-case-grid">
+
+          <div class="card fade-in">
+            <div class="use-case-icon">🌊</div>
+            <h3>Environmental Monitoring</h3>
+            <p style="color:var(--silver-dim); margin-top:0.75rem; font-size:0.95rem;">
+              Continuous water quality sampling, algae bloom detection, and
+              climate data collection across lakes, rivers, and coastal zones.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="transition-delay:0.1s">
+            <div class="use-case-icon">🛰️</div>
+            <h3>Hydrographic Survey</h3>
+            <p style="color:var(--silver-dim); margin-top:0.75rem; font-size:0.95rem;">
+              Bathymetric mapping, sonar survey operations, and infrastructure
+              inspection without requiring manned vessels.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="transition-delay:0.2s">
+            <div class="use-case-icon">🔒</div>
+            <h3>Maritime Security</h3>
+            <p style="color:var(--silver-dim); margin-top:0.75rem; font-size:0.95rem;">
+              Persistent perimeter patrol, port monitoring, and anomaly
+              detection for harbors and restricted waterways.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="transition-delay:0.3s">
+            <div class="use-case-icon">⚙️</div>
+            <h3>Infrastructure Inspection</h3>
+            <p style="color:var(--silver-dim); margin-top:0.75rem; font-size:0.95rem;">
+              Underwater and surface-level inspection of bridges, pipelines,
+              dams, and offshore energy structures.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="transition-delay:0.4s">
+            <div class="use-case-icon">🔬</div>
+            <h3>Research Platforms</h3>
+            <p style="color:var(--silver-dim); margin-top:0.75rem; font-size:0.95rem;">
+              Deployable research vessels for universities, government agencies,
+              and oceanographic institutions.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="transition-delay:0.5s">
+            <div class="use-case-icon">🏗️</div>
+            <h3>Custom Missions</h3>
+            <p style="color:var(--silver-dim); margin-top:0.75rem; font-size:0.95rem;">
+              Modular payload architecture means GT vehicles can be configured
+              for virtually any surface mission requirement.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="cta-band">
+      <div class="container">
+        <p class="section-label" style="justify-content:center">Next Steps</p>
+        <h2>Ready to Learn More?</h2>
+        <p>Explore the technology behind our platform or reach out to discuss partnership and investment opportunities.</p>
+        <a href="technology.html" class="btn btn-primary">See the Technology</a>
+        <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="MainLogoPNG.png" alt="GT" />
+        <span>Gustafson Technologies</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="technology.html">Technology</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 Gustafson Technologies LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>

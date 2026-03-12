@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Gustafson Technologies</title>
+  <meta name="description" content="Meet the founder of Gustafson Technologies. Building autonomous surface vehicles from the ground up." />
+  <link rel="icon" type="image/png" href="MainLogoPNG.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-hero {
+      padding: 6rem 0 4rem;
+      background: linear-gradient(160deg, var(--navy-800), var(--navy-900));
+      border-bottom: 1px solid var(--grid-line);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: 'ABOUT';
+      position: absolute;
+      right: -1rem; bottom: -1.5rem;
+      font-family: var(--font-display);
+      font-size: 12rem;
+      font-weight: 900;
+      color: rgba(59,158,222,0.04);
+      pointer-events: none;
+    }
+
+    /* ── FOUNDER LAYOUT ── */
+    .founder-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+
+    .founder-photo-wrap {
+      position: sticky;
+      top: 90px;
+    }
+
+    .founder-photo-box {
+      background: rgba(13,45,74,0.5);
+      border: 1px solid var(--grid-line);
+      border-top: 3px solid var(--accent);
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .founder-photo-box img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .founder-photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      text-align: center;
+      color: var(--silver-dim);
+    }
+    .founder-photo-placeholder .icon { font-size: 4rem; opacity: 0.3; }
+    .founder-photo-placeholder p {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .founder-name-card {
+      background: rgba(10,32,53,0.8);
+      border: 1px solid var(--grid-line);
+      border-top: none;
+      padding: 1.25rem;
+    }
+    .founder-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+    .founder-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    /* Founder social links */
+    .founder-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .founder-link {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--grid-line);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .founder-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── BIO CONTENT ── */
+    .bio-section { margin-bottom: 3rem; }
+    .bio-section p {
+      color: var(--silver-dim);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .bio-section p:last-child { margin-bottom: 0; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .skill-name {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      display: flex;
+      justify-content: space-between;
+    }
+    .skill-name span { color: var(--accent); }
+    .skill-bar {
+      height: 3px;
+      background: var(--navy-700);
+      position: relative;
+    }
+    .skill-fill {
+      position: absolute;
+      top: 0; left: 0; height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      transition: width 1.5s ease;
+    }
+
+    /* ── MISSION STATEMENT ── */
+    .mission-block {
+      background: rgba(13,45,74,0.5);
+      border-left: 3px solid var(--accent);
+      padding: 2rem 2.5rem;
+      margin: 4rem 0;
+      position: relative;
+    }
+    .mission-block::before {
+      content: '"';
+      position: absolute;
+      top: -0.5rem; left: 1.5rem;
+      font-family: var(--font-display);
+      font-size: 6rem;
+      font-weight: 900;
+      color: rgba(59,158,222,0.1);
+      line-height: 1;
+    }
+    .mission-text {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* ── COMPANY FACTS ── */
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      .founder-layout { grid-template-columns: 1fr; }
+      .founder-photo-wrap { position: static; }
+      .founder-photo-box { aspect-ratio: 1/1; }
+    }
+    @media (max-width: 768px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .facts-grid  { grid-template-columns: 1fr; }
+      .page-hero::after { font-size: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="MainLogoPNG.png" alt="GT" />
+      <span class="nav-logo-text">Gustafson Technologies</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="technology.html">Technology</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <div class="page-hero">
+      <div class="container">
+        <p class="section-label">The Team</p>
+        <h1>About GT</h1>
+        <p style="color:var(--silver-dim); max-width:600px; margin-top:1rem; font-size:1.05rem;">
+          A founder-led deep-tech startup building the next generation of
+          autonomous maritime platforms from the ground up.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── FOUNDER ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Founder</p>
+        <h2>The Person Behind the Platform</h2>
+
+        <div class="founder-layout">
+
+          <div class="founder-photo-wrap fade-in">
+            <div class="founder-photo-box">
+              <!--
+                REPLACE THIS PLACEHOLDER with your photo:
+                <img src="images/founder.jpg" alt="[Your Name]" />
+              -->
+              <div class="founder-photo-placeholder">
+                <div class="icon">👤</div>
+                <p>Add your photo here<br/>Replace with:<br/>&lt;img src="images/founder.jpg"&gt;</p>
+              </div>
+            </div>
+            <div class="founder-name-card">
+              <!-- UPDATE: Replace with your actual name and title -->
+              <div class="founder-name">[Your Name]</div>
+              <div class="founder-title">Founder & CEO — Gustafson Technologies LLC</div>
+              <div class="founder-links">
+                <!-- UPDATE: Replace # with your actual profile links -->
+                <a href="#" class="founder-link">LinkedIn</a>
+                <a href="#" class="founder-link">GitHub</a>
+                <a href="contact.html" class="founder-link">Email</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-in">
+
+            <div class="bio-section">
+              <p class="section-label">Background</p>
+              <!--
+                UPDATE THIS: Replace the placeholder text below with your real bio.
+                Write 2-3 paragraphs covering:
+                1. Who you are and what you're studying
+                2. What drove you to start Gustafson Technologies
+                3. Your technical background and what makes you the right person to build this
+              -->
+              <p>
+                [Write your intro paragraph here. What are you studying? What university?
+                What's your background in engineering, robotics, or autonomous systems?
+                Keep it professional but personal — investors and judges want to know who you are.]
+              </p>
+              <p>
+                [Second paragraph: What led you to autonomous surface vehicles specifically?
+                Was there a specific problem you encountered? A research project? A gap in the market
+                you identified? Tell that origin story — it's one of the most compelling parts of any pitch.]
+              </p>
+              <p>
+                [Third paragraph: What's your vision for Gustafson Technologies? Where do you see
+                the company in 3–5 years? Be specific and ambitious. Judges and investors want to see
+                that you've thought deeply about the opportunity.]
+              </p>
+            </div>
+
+            <div class="bio-section">
+              <p class="section-label">Technical Skills</p>
+              <div class="skills-grid" id="skills-grid">
+                <!-- UPDATE: Customize these skills to match your actual expertise -->
+                <div class="skill-item">
+                  <div class="skill-name">Sensor Fusion <span>Advanced</span></div>
+                  <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-name">Embedded Systems <span>Intermediate</span></div>
+                  <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-name">Python / Data Processing <span>Advanced</span></div>
+                  <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-name">CAD / Mechanical Design <span>Intermediate</span></div>
+                  <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-name">Control Systems <span>Developing</span></div>
+                  <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-name">Autonomous Navigation <span>Intermediate</span></div>
+                  <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── MISSION ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Mission</p>
+        <h2>Why We Exist</h2>
+
+        <div class="mission-block fade-in">
+          <!--
+            UPDATE: Write your actual mission statement here.
+            Make it bold, specific, and memorable — one or two sentences max.
+          -->
+          <p class="mission-text">
+            To make autonomous surface vehicles accessible, reliable, and
+            deployable — unlocking the data-rich potential of the world's waterways.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
+          <div>
+            <h3 style="margin-bottom:1rem;">Our Approach</h3>
+            <p style="color:var(--silver-dim); line-height:1.8;">
+              We build from first principles. Every design decision in the GT
+              platform starts with the question: what does a reliable, real-world
+              autonomous surface vehicle actually need? We don't bolt autonomy
+              onto an existing hull — we engineer the whole system together.
+            </p>
+            <p style="color:var(--silver-dim); line-height:1.8; margin-top:1rem;">
+              <!--
+                UPDATE: Add anything specific about your technical philosophy,
+                design choices, or why your approach is different from
+                existing ASV solutions on the market.
+              -->
+              [Add more detail about your engineering philosophy here.]
+            </p>
+          </div>
+          <div>
+            <h3 style="margin-bottom:1rem;">What Sets GT Apart</h3>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.9rem; color:var(--silver-dim);">
+              <li style="display:flex; gap:0.75rem; align-items:flex-start;">
+                <span style="color:var(--accent); flex-shrink:0;">◆</span>
+                Ground-up design optimized for autonomous operation — not a
+                retrofitted RC boat
+              </li>
+              <li style="display:flex; gap:0.75rem; align-items:flex-start;">
+                <span style="color:var(--accent); flex-shrink:0;">◆</span>
+                Open, modular architecture that accommodates any mission payload
+              </li>
+              <li style="display:flex; gap:0.75rem; align-items:flex-start;">
+                <span style="color:var(--accent); flex-shrink:0;">◆</span>
+                Founder with deep hands-on hardware and software development experience
+              </li>
+              <li style="display:flex; gap:0.75rem; align-items:flex-start;">
+                <span style="color:var(--accent); flex-shrink:0;">◆</span>
+                <!-- UPDATE: Add your specific differentiator here -->
+                [Your unique advantage or differentiator]
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── COMPANY FACTS ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Company</p>
+        <h2>Gustafson Technologies LLC</h2>
+        <div class="facts-grid fade-in">
+          <div class="card">
+            <div class="stat-number">2025</div>
+            <div class="stat-label">Year Founded</div>
+            <p style="color:var(--silver-dim); font-size:0.88rem; margin-top:1rem;">
+              Founded with the goal of commercializing autonomous surface vehicle
+              technology developed through hands-on engineering.
+            </p>
+          </div>
+          <div class="card">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Working Prototype</div>
+            <p style="color:var(--silver-dim); font-size:0.88rem; margin-top:1rem;">
+              Fully integrated benchtop prototype validating core autonomy
+              and propulsion subsystems.
+            </p>
+          </div>
+          <div class="card">
+            <div class="stat-number">ASV</div>
+            <div class="stat-label">Core Technology</div>
+            <p style="color:var(--silver-dim); font-size:0.88rem; margin-top:1rem;">
+              Autonomous surface vehicles with modular payload architecture
+              for diverse maritime applications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section style="padding: 5rem 0; background: rgba(13,45,74,0.3); border-top: 1px solid var(--grid-line);">
+      <div class="container" style="text-align:center;">
+        <p class="section-label" style="justify-content:center">Work With Us</p>
+        <h2>Interested in Partnering<br />or Investing?</h2>
+        <p style="color:var(--silver-dim); margin: 1rem auto 2.5rem; max-width:480px;">
+          We're actively seeking strategic partners, early customers, and investors
+          who share our vision for autonomous maritime operations.
+        </p>
+        <a href="contact.html" class="btn btn-primary">Get in Touch →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="MainLogoPNG.png" alt="GT" />
+        <span>Gustafson Technologies</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="technology.html">Technology</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 Gustafson Technologies LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
