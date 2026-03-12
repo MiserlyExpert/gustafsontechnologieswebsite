@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technology — Gustafson Technologies</title>
+  <meta name="description" content="The engineering behind Gustafson Technologies' autonomous surface vehicle platform — sensor fusion, control systems, and modular design." />
+  <link rel="icon" type="image/png" href="MainLogoPNG.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 6rem 0 4rem;
+      background: linear-gradient(160deg, var(--navy-800), var(--navy-900));
+      border-bottom: 1px solid var(--grid-line);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: 'TECHNOLOGY';
+      position: absolute;
+      right: -1rem;
+      bottom: -1.5rem;
+      font-family: var(--font-display);
+      font-size: 10rem;
+      font-weight: 900;
+      color: rgba(59,158,222,0.04);
+      pointer-events: none;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── PROTOTYPE SHOWCASE ── */
+    .prototype-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 4rem;
+    }
+    .prototype-image-box {
+      background: rgba(13,45,74,0.5);
+      border: 1px solid var(--grid-line);
+      border-top: 3px solid var(--accent);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .prototype-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .image-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      color: var(--silver-dim);
+      text-align: center;
+      padding: 2rem;
+    }
+    .image-placeholder .icon { font-size: 3rem; opacity: 0.4; }
+    .image-placeholder p {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .image-caption {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--silver-dim);
+      text-transform: uppercase;
+      padding: 0.75rem 1rem;
+      background: rgba(7,24,40,0.8);
+      border-top: 1px solid var(--grid-line);
+    }
+
+    /* ── SPEC TABLE ── */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--grid-line);
+      margin-top: 2rem;
+    }
+    .spec-row {
+      display: contents;
+    }
+    .spec-key, .spec-val {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--grid-line);
+      font-size: 0.9rem;
+    }
+    .spec-key {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--silver-dim);
+      text-transform: uppercase;
+      background: rgba(10,32,53,0.5);
+      border-right: 1px solid var(--grid-line);
+    }
+    .spec-val {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* ── SYSTEM LAYERS ── */
+    .layers-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid var(--grid-line);
+    }
+    .layer {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-bottom: 1px solid var(--grid-line);
+      transition: background 0.2s;
+    }
+    .layer:last-child { border-bottom: none; }
+    .layer:hover { background: rgba(59,158,222,0.04); }
+    .layer-label {
+      padding: 1.5rem;
+      background: rgba(10,32,53,0.6);
+      border-right: 1px solid var(--grid-line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    .layer-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+    .layer-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .layer-content {
+      padding: 1.5rem;
+      color: var(--silver-dim);
+      font-size: 0.92rem;
+    }
+    .layer-content strong { color: var(--silver); font-weight: 600; }
+
+    /* ── CAD SECTION ── */
+    .cad-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .cad-frame {
+      background: rgba(13,45,74,0.5);
+      border: 1px solid var(--grid-line);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cad-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .cad-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(7,24,40,0.85);
+      padding: 0.6rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--silver-dim);
+      text-transform: uppercase;
+    }
+
+    /* ── ROADMAP ── */
+    .roadmap {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 3rem;
+      position: relative;
+    }
+    .roadmap::before {
+      content: '';
+      position: absolute;
+      left: 1.5rem;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), rgba(59,158,222,0.1));
+    }
+    .roadmap-item {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+    .roadmap-item:last-child { padding-bottom: 0; }
+    .roadmap-dot {
+      width: 3rem; height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .roadmap-dot.done    { background: var(--accent); color: var(--navy-900); }
+    .roadmap-dot.current { background: var(--navy-700); border: 2px solid var(--accent); color: var(--accent); }
+    .roadmap-dot.future  { background: var(--navy-800); border: 1px solid var(--grid-line); color: var(--silver-dim); }
+    .roadmap-phase {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .roadmap-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .roadmap-desc { color: var(--silver-dim); font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .prototype-layout { grid-template-columns: 1fr; }
+      .spec-grid  { grid-template-columns: 1fr; }
+      .spec-key   { border-right: none; border-bottom: none; }
+      .cad-grid   { grid-template-columns: 1fr; }
+      .layer      { grid-template-columns: 1fr; }
+      .layer-label { border-right: none; border-bottom: 1px solid var(--grid-line); }
+      .page-hero::after { font-size: 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="MainLogoPNG.png" alt="GT" />
+      <span class="nav-logo-text">Gustafson Technologies</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="technology.html">Technology</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <div class="page-hero">
+      <div class="container">
+        <p class="section-label">Engineering</p>
+        <h1>The Platform</h1>
+        <p style="color:var(--silver-dim); max-width:600px; margin-top:1rem; font-size:1.05rem;">
+          A ground-up design built for real-world autonomous surface operations.
+          Every subsystem engineered for reliability, modularity, and scalable deployment.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── PROTOTYPE ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Hardware</p>
+        <h2>Benchtop Prototype</h2>
+
+        <div class="prototype-layout">
+          <div>
+            <div class="prototype-image-box">
+              <!-- REPLACE src with your actual prototype photo path, e.g. src="images/prototype.jpg" -->
+              <div class="image-placeholder">
+                <div class="icon">🛥️</div>
+                <p>Add your prototype photo here<br/>Replace this div with:<br/>&lt;img src="images/prototype.jpg" alt="GT ASV Prototype"&gt;</p>
+              </div>
+            </div>
+            <div class="image-caption">GT-ASV-001 // Benchtop Prototype // Active Development</div>
+          </div>
+
+          <div class="fade-in">
+            <p class="section-label">Status</p>
+            <h3>Working Prototype — Active Development</h3>
+            <div class="accent-line"></div>
+            <p style="color:var(--silver-dim); margin-bottom:1.5rem;">
+              The current benchtop prototype validates core subsystem integration:
+              power distribution, embedded compute, sensor interfacing, and
+              motor control. Hardware-in-the-loop testing is ongoing.
+            </p>
+
+            <div class="spec-grid">
+              <div class="spec-key">Platform Type</div>
+              <div class="spec-val">Twin-hull catamaran ASV</div>
+
+              <div class="spec-key">Compute</div>
+              <div class="spec-val"><!-- e.g. Raspberry Pi 4 / Jetson Nano → update this -->[Embedded compute module]</div>
+
+              <div class="spec-key">Propulsion</div>
+              <div class="spec-val">[Motor / thruster config]</div>
+
+              <div class="spec-key">Power</div>
+              <div class="spec-val">[Battery type / capacity]</div>
+
+              <div class="spec-key">Sensors</div>
+              <div class="spec-val">[IMU, GPS, camera, etc.]</div>
+
+              <div class="spec-key">Comms</div>
+              <div class="spec-val">[Radio / WiFi / cellular]</div>
+
+              <div class="spec-key">Build Status</div>
+              <div class="spec-val" style="color:var(--accent)">✓ Prototype Complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── CAD ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Design</p>
+        <h2>CAD Model</h2>
+        <p style="color:var(--silver-dim); margin-top:0.75rem; max-width:600px;">
+          The CAD model is a 1:1 representation of the physical prototype, designed
+          for manufacturability and modular reconfiguration.
+        </p>
+
+        <div class="cad-grid fade-in">
+          <div class="cad-frame">
+            <!-- Replace with: <img src="images/cad-iso.png" alt="CAD isometric view"> -->
+            <div class="image-placeholder">
+              <div class="icon">📐</div>
+              <p>Add CAD screenshot<br/>cad-iso.png</p>
+            </div>
+            <div class="cad-label">Isometric View</div>
+          </div>
+          <div class="cad-frame">
+            <div class="image-placeholder">
+              <div class="icon">📐</div>
+              <p>Add CAD screenshot<br/>cad-top.png</p>
+            </div>
+            <div class="cad-label">Top View</div>
+          </div>
+          <div class="cad-frame">
+            <div class="image-placeholder">
+              <div class="icon">📐</div>
+              <p>Add CAD screenshot<br/>cad-front.png</p>
+            </div>
+            <div class="cad-label">Front View</div>
+          </div>
+          <div class="cad-frame">
+            <div class="image-placeholder">
+              <div class="icon">📐</div>
+              <p>Add CAD screenshot<br/>cad-exploded.png</p>
+            </div>
+            <div class="cad-label">Exploded View</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── SYSTEM ARCHITECTURE ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Architecture</p>
+        <h2>System Layers</h2>
+        <p style="color:var(--silver-dim); margin-top:0.75rem; max-width:600px;">
+          The GT platform is organized into discrete, testable software and hardware layers —
+          enabling independent development and validation of each subsystem.
+        </p>
+
+        <div class="layers-stack fade-in">
+          <div class="layer">
+            <div class="layer-label">
+              <div class="layer-number">LAYER 01</div>
+              <div class="layer-name">Perception</div>
+            </div>
+            <div class="layer-content">
+              <strong>Sensor Fusion & Environment Awareness.</strong> IMU, GPS, camera,
+              and ranging sensors feed a real-time fusion pipeline. The vehicle builds
+              a continuous world model used for navigation and obstacle avoidance.
+            </div>
+          </div>
+
+          <div class="layer">
+            <div class="layer-label">
+              <div class="layer-number">LAYER 02</div>
+              <div class="layer-name">Planning</div>
+            </div>
+            <div class="layer-content">
+              <strong>Path Planning & Mission Logic.</strong> Waypoint-based mission
+              execution with dynamic re-routing around detected obstacles. Supports
+              predefined mission profiles and real-time operator override.
+            </div>
+          </div>
+
+          <div class="layer">
+            <div class="layer-label">
+              <div class="layer-number">LAYER 03</div>
+              <div class="layer-name">Control</div>
+            </div>
+            <div class="layer-content">
+              <strong>Actuation & Stabilization.</strong> Closed-loop motor control
+              maintains heading and speed in the presence of wind, current, and wave
+              disturbance. PID-based control architecture with state estimation.
+            </div>
+          </div>
+
+          <div class="layer">
+            <div class="layer-label">
+              <div class="layer-number">LAYER 04</div>
+              <div class="layer-name">Comms</div>
+            </div>
+            <div class="layer-content">
+              <strong>Telemetry & Ground Control.</strong> Bidirectional data link
+              for real-time telemetry streaming, mission upload, and manual override.
+              Designed for graceful degradation if link is lost.
+            </div>
+          </div>
+
+          <div class="layer">
+            <div class="layer-label">
+              <div class="layer-number">LAYER 05</div>
+              <div class="layer-name">Payload</div>
+            </div>
+            <div class="layer-content">
+              <strong>Modular Mission Payload Interface.</strong> Standardized
+              electrical and mechanical interfaces accept swappable sensor payloads —
+              water quality probes, sonar, cameras, and more.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── ROADMAP ── -->
+    <section>
+      <div class="container">
+        <p class="section-label">Development</p>
+        <h2>Roadmap</h2>
+
+        <div class="roadmap fade-in">
+          <div class="roadmap-item">
+            <div class="roadmap-dot done">✓</div>
+            <div>
+              <div class="roadmap-phase">Phase 01 — Complete</div>
+              <div class="roadmap-title">Benchtop Prototype</div>
+              <div class="roadmap-desc">Core subsystem integration validated. Power, compute, sensors, and motor control operating as an integrated system on the bench.</div>
+            </div>
+          </div>
+
+          <div class="roadmap-item">
+            <div class="roadmap-dot current">→</div>
+            <div>
+              <div class="roadmap-phase">Phase 02 — In Progress</div>
+              <div class="roadmap-title">Water Trials & Control System Tuning</div>
+              <div class="roadmap-desc">First in-water tests. Validating buoyancy, propulsion authority, and closed-loop heading control in real conditions.</div>
+            </div>
+          </div>
+
+          <div class="roadmap-item">
+            <div class="roadmap-dot future">03</div>
+            <div>
+              <div class="roadmap-phase">Phase 03 — Planned</div>
+              <div class="roadmap-title">Autonomous Navigation Demo</div>
+              <div class="roadmap-desc">Full waypoint mission execution with onboard obstacle avoidance. First end-to-end autonomous run for investor and partner demonstration.</div>
+            </div>
+          </div>
+
+          <div class="roadmap-item">
+            <div class="roadmap-dot future">04</div>
+            <div>
+              <div class="roadmap-phase">Phase 04 — Planned</div>
+              <div class="roadmap-title">Payload Integration & Field Deployment</div>
+              <div class="roadmap-desc">First modular payload mission. Targeting environmental monitoring use case with a partner organization for real-world data collection.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="MainLogoPNG.png" alt="GT" />
+        <span>Gustafson Technologies</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="technology.html">Technology</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 Gustafson Technologies LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
