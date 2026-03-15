@@ -362,7 +362,8 @@ footer {
     padding: 1rem 0;
   }
   .nav-links.open { display: flex; }
-  .nav-links a { padding: 0.9rem 2rem; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 0.9rem 2rem; }
   .nav-links a::after { display: none; }
   .nav-toggle { display: flex; }
 
